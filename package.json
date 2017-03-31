@@ -18,6 +18,7 @@
     "cors": "~2.8.3",
     "bootstrap-select": "~1.12.2",
     "cheerio": "~0.22.0",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "syncho": "~0.2.5"
   }
 }

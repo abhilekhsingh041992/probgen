@@ -4,12 +4,34 @@ var router = express.Router();
 var util = require('util');
 var cheerio = require('cheerio');
 var codeforces = require('codeforces-api');
+var Sync = require('syncho');
 
 
-
+var codeforcesProblemsUrl = "http://codeforces.com/api/problemset.problems?tags";
 var codeforcesProblemUrl = "http://codeforces.com/contest/%s/problem/%s";
 var codeforcesSubmitUrl = "http://codeforces.com/contest/%s/submit/%s";
-codeforces.setApis('c154b154ae345a990f5024e89420e88cc7215a58', 'ce0e9272c69f5d5d43e33233d78a4876394c1785')
+codeforces.setApis('c154b154ae345a990f5024e89420e88cc7215a58', 'ce0e9272c69f5d5d43e33233d78a4876394c1785');
+
+
+var problems = [{
+    "contestId": 788,
+    "index": "C",
+    "name": "The Great Mixing",
+    "type": "PROGRAMMING",
+    "points": 1500,
+    "tags": [
+        "dfs and similar",
+        "dp",
+        "math"
+    ]
+}];
+
+request(codeforcesProblemsUrl, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+        problems = data.result.problems;
+    }
+});
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,6 +41,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/problems/random', function(req, res) {
     var problem = getRandomProblem(1, []);
+    console.log(problem);
     var problemUrl = util.format(codeforcesProblemUrl, problem.contestId, problem.index);
     var submitUrl = util.format(codeforcesSubmitUrl, problem.contestId, problem.index);
 
@@ -43,26 +66,19 @@ router.get('/problems/random', function(req, res) {
 
 });
 
-
 module.exports = router;
 
 
+
 function getRandomProblem(level, tags) {
-    return randomProblem;
+    var indexId = Math.floor(Math.random()*problems.length);
+    console.log(problems.length);
+    console.log(indexId);
+    console.log(problems);
+    return problems[indexId];
 }
 
-var randomProblem = {
-    "contestId": 788,
-    "index": "C",
-    "name": "The Great Mixing",
-    "type": "PROGRAMMING",
-    "points": 1500,
-    "tags": [
-        "dfs and similar",
-        "dp",
-        "math"
-    ]
-};
+
 
 var tags = [
     "implementation","dp","math","greedy","brute force","data structures","constructive algorithms",
