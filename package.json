@@ -17,6 +17,7 @@
     "pug-bootstrap": "~0.0.12",
     "cors": "~2.8.3",
     "bootstrap-select": "~1.12.2",
-    "cheerio": "~0.22.0"
+    "cheerio": "~0.22.0",
+    "requests": "~0.1.7"
   }
 }
