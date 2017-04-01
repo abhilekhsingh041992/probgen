@@ -193,4 +193,11 @@ section{
   filter: alpha(opacity=0);
 }
 .verticle-content{
-  display: block;}
+  display: block;
+}
+
+
+.sidebar {
+  position: fixed;
+  width:228px;
+}
